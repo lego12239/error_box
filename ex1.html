@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>error box example1</title>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="error_box.css" type="text/css"/>
+  <script src="error_box.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    var errbox;
+
+    function init()
+    {
+      errbox = new error_box(document.getElementById("errorbox"));
+
+      errbox.show("Here is some error message");
+    }
+  </script>
+</head>
+<body onload="init()">
+<!----------------------------------------------------------------------
+       Error box
+----------------------------------------------------------------------->
+<div id="errorbox">
+</div>
+
+<div style="margin-top: 20px">
+	<input type="button" onclick="errbox.hide()" value="hide"/>
+	<input type="button" onclick="errbox.show()" value="show"/>
+</div>
+</body>
+</html>

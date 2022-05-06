@@ -1,0 +1,18 @@
+error_box
+==============
+
+A javascript library for displaying a box with an error message.
+
+Using
+=====
+
+Example:
+
+var errbox = new error_box(document.getElementById("errorbox"));
+errbox.show();
+setTimeout(function () { errbox.hide();}, 10000);
+
+The constructor can also accepts a show callback and a hide callback, which
+are called on show() and hide() actions.
+
+Examples - ex*.html.
