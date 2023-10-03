@@ -45,6 +45,9 @@ function error_box(cntr_el, show_cb, hide_cb)
 
 error_box.prototype.show = function (emsg)
 {
+	if (this.el.cntr.classList.contains(this.show_class))
+		return;
+
 	if (emsg != null)
 		this.el.cntr.innerHTML = emsg;
 	this.el.cntr.classList.add(this.show_class);
@@ -54,6 +57,9 @@ error_box.prototype.show = function (emsg)
 
 error_box.prototype.hide = function ()
 {
+	if (!this.el.cntr.classList.contains(this.show_class))
+		return;
+
 	this.el.cntr.classList.remove(this.show_class);
 
 	return this.cb.hide();
