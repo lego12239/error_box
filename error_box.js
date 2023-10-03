@@ -33,10 +33,14 @@ function error_box(cntr_el, show_cb, hide_cb)
 
 
 	this.el.cntr = cntr_el;
-	if (show_cb != undefined)
-		this.cb.show = show_cb;
-	if (hide_cb != undefined)
-		this.cb.hide = hide_cb;
+	if (show_cb != null)
+		this.cb.show = show_cb.bind(this);
+	else
+		this.cb.show = function () { return true; };
+	if (hide_cb != null)
+		this.cb.hide = hide_cb.bind(this);
+	else
+		this.cb.hide = function () { return true; };
 }
 
 error_box.prototype.show = function (emsg)
@@ -45,14 +49,12 @@ error_box.prototype.show = function (emsg)
 		this.el.cntr.innerHTML = emsg;
 	this.el.cntr.classList.add(this.show_class);
 
-	if (this.cb.show != undefined)
-		this.cb.show();
+	return this.cb.show();
 }
 
 error_box.prototype.hide = function ()
 {
 	this.el.cntr.classList.remove(this.show_class);
 
-	if (this.cb.hide != undefined)
-		this.cb.hide();
+	return this.cb.hide();
 }
