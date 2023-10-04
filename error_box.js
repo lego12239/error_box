@@ -31,7 +31,6 @@ function error_box(cntr_el, show_cb, hide_cb)
 	this.cb = {show: null, hide: null};
 	this.show_class = "show";
 
-
 	this.el.cntr = cntr_el;
 	if (show_cb != null)
 		this.cb.show = show_cb.bind(this);
@@ -43,6 +42,13 @@ function error_box(cntr_el, show_cb, hide_cb)
 		this.cb.hide = function () { return true; };
 }
 
+/*
+ * Show error message.
+ * prms:
+ *  emsg - an error message
+ *  el   - a container element for an error message
+ *         if null, then use element specified at constructor call
+ */
 error_box.prototype.show = function (emsg, el)
 {
 	if (el == null)
@@ -58,6 +64,12 @@ error_box.prototype.show = function (emsg, el)
 	return this.cb.show();
 }
 
+/*
+ * Hide error message.
+ * prms:
+ *  el   - a container element with an error message
+ *         if null, then use element specified at constructor call
+ */
 error_box.prototype.hide = function (el)
 {
 	if (el == null)
