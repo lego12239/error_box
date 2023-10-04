@@ -43,24 +43,30 @@ function error_box(cntr_el, show_cb, hide_cb)
 		this.cb.hide = function () { return true; };
 }
 
-error_box.prototype.show = function (emsg)
+error_box.prototype.show = function (emsg, el)
 {
-	if (this.el.cntr.classList.contains(this.show_class))
+	if (el == null)
+		el = this.el.cntr;
+
+	if (el.classList.contains(this.show_class))
 		return;
 
 	if (emsg != null)
-		this.el.cntr.innerHTML = emsg;
-	this.el.cntr.classList.add(this.show_class);
+		el.innerHTML = emsg;
+	el.classList.add(this.show_class);
 
 	return this.cb.show();
 }
 
-error_box.prototype.hide = function ()
+error_box.prototype.hide = function (el)
 {
-	if (!this.el.cntr.classList.contains(this.show_class))
+	if (el == null)
+		el = this.el.cntr;
+
+	if (!el.classList.contains(this.show_class))
 		return;
 
-	this.el.cntr.classList.remove(this.show_class);
+	el.classList.remove(this.show_class);
 
 	return this.cb.hide();
 }
