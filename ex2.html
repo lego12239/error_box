@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>error box example2</title>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="error_box.css" type="text/css"/>
+  <style type="text/css">
+    .err {
+      color: red;
+      display: none;
+    }
+    .err.show {
+      display: inline-block;
+    }
+  </style>
+  <script src="error_box.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    var errbox;
+
+    function init()
+    {
+      errbox = new error_box();
+    }
+    function check(ev)
+    {
+      var sum, el_err;
+
+      el_err = ev.target.closest(".item").querySelector(".f_err_cntr");
+      sum = ev.target.value;
+      if ((sum != "") && (sum.match(/^[0-9]+(\.[0-9]+)?$/) == null)) {
+        errbox.show("Wrong sum: " + sum, el_err);
+        return;
+      }
+      errbox.hide(el_err);
+    }
+  </script>
+</head>
+<body onload="init()">
+<div class="item">
+  <div><input type="text" oninput="check(event)"/></div>
+  <div class="f_err_cntr err"></div>
+</div>
+
+<div class="item">
+  <div><input type="text" oninput="check(event)"/></div>
+  <div class="f_err_cntr err"></div>
+</div>
+
+<div class="item">
+  <div><input type="text" oninput="check(event)"/></div>
+  <div class="f_err_cntr err"></div>
+</div>
+
+</body>
+</html>
