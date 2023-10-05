@@ -29,10 +29,10 @@
       el_err = ev.target.closest(".item").querySelector(".f_err_cntr");
       sum = ev.target.value;
       if ((sum != "") && (sum.match(/^[0-9]+(\.[0-9]+)?$/) == null)) {
-        errbox.show("Wrong sum: " + sum, el_err);
+        errbox.show("Wrong sum: " + sum, {el: el_err});
         return;
       }
-      errbox.hide(el_err);
+      errbox.hide({el: el_err});
     }
   </script>
 </head>

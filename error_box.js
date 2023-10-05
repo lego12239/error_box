@@ -46,20 +46,24 @@ function error_box(cntr_el, show_cb, hide_cb)
  * Show error message.
  * prms:
  *  emsg - an error message
- *  el   - a container element for an error message
- *         if null, then use element specified at constructor call
+ *  opts - an object with options:
+ *         el   - a container element for an error message
+ *                if null, then use element specified at constructor call
  */
-error_box.prototype.show = function (emsg, el)
+error_box.prototype.show = function (emsg, opts)
 {
-	if (el == null)
-		el = this.el.cntr;
+	if (opts == null) {
+		opts = {el: null};
+	}
+	if (opts.el == null)
+		opts.el = this.el.cntr;
 
-	if (el.classList.contains(this.show_class))
+	if (opts.el.classList.contains(this.show_class))
 		return;
 
 	if (emsg != null)
-		el.innerHTML = emsg;
-	el.classList.add(this.show_class);
+		opts.el.innerHTML = emsg;
+	opts.el.classList.add(this.show_class);
 
 	return this.cb.show();
 }
@@ -67,18 +71,22 @@ error_box.prototype.show = function (emsg, el)
 /*
  * Hide error message.
  * prms:
- *  el   - a container element with an error message
- *         if null, then use element specified at constructor call
+ *  opts - an object with options:
+ *         el   - a container element with an error message
+ *                if null, then use element specified at constructor call
  */
-error_box.prototype.hide = function (el)
+error_box.prototype.hide = function (opts)
 {
-	if (el == null)
-		el = this.el.cntr;
+	if (opts == null) {
+		opts = {el: null};
+	}
+	if (opts.el == null)
+		opts.el = this.el.cntr;
 
-	if (!el.classList.contains(this.show_class))
+	if (!opts.el.classList.contains(this.show_class))
 		return;
 
-	el.classList.remove(this.show_class);
+	opts.el.classList.remove(this.show_class);
 
 	return this.cb.hide();
 }
