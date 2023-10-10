@@ -65,7 +65,7 @@ error_box.prototype.show = function (emsg, opts)
 		opts.el.innerHTML = emsg;
 	opts.el.classList.add(this.show_class);
 
-	return this.cb.show();
+	return this.cb.show(emsg, opts);
 }
 
 /*
@@ -88,5 +88,5 @@ error_box.prototype.hide = function (opts)
 
 	opts.el.classList.remove(this.show_class);
 
-	return this.cb.hide();
+	return this.cb.hide(opts);
 }
