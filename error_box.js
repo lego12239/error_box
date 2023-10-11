@@ -56,7 +56,7 @@ error_box.prototype.show = function (emsg, opts)
 	var el_tag, el_msg;
 
 	if (opts == null) {
-		opts = {tag: "", el: null};
+		opts = {tag: "", el: null, is_append: 0};
 	}
 	if (opts.el == null)
 		opts.el = this.el.cntr;
@@ -70,7 +70,8 @@ error_box.prototype.show = function (emsg, opts)
 		}
 		el = document.createElement("div");
 		el.innerHTML = this.cb.show(emsg, opts);
-		el_tag.innerHTML = "";
+		if (!opts.is_append)
+			el_tag.innerHTML = "";
 		el_tag.append(el);
 	}
 	opts.el.classList.add(this.show_class);
