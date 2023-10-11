@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>error box tags</title>
+  <title>error box tags, is_append</title>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="error_box.css" type="text/css"/>
   <style type="text/css">
@@ -24,11 +24,15 @@
     }
     function check(ev)
     {
-      var sum;
+      var sum, is_append = 0;
+
+      if (document.getElementById("chbox_is_append").checked)
+      	is_append = 1;
 
       sum = ev.target.value;
       if ((sum != "") && (sum.match(/^[0-9]+(\.[0-9]+)?$/) == null)) {
-        errbox.show(ev.target.name + ": wrong sum: " + sum, {tag: ev.target.name});
+        errbox.show(ev.target.name + ": wrong sum: " + sum,
+          {tag: ev.target.name, is_append: is_append});
         return;
       }
       errbox.hide({tag: ev.target.name});
@@ -37,6 +41,11 @@
 </head>
 <body onload="init()">
 <div id="err_cntr">
+</div>
+
+<div>
+  <span>append emsg: </span>
+  <input id="chbox_is_append" type="checkbox" value=""/>
 </div>
 
 <div class="item">
