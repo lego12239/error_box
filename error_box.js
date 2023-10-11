@@ -47,22 +47,32 @@ function error_box(cntr_el, show_cb, hide_cb)
  * prms:
  *  emsg - an error message
  *  opts - an object with options:
+ *         tag  - a message tag ("" by default)
  *         el   - a container element for an error message
  *                if null, then use element specified at constructor call
  */
 error_box.prototype.show = function (emsg, opts)
 {
+	var el_tag, el_msg;
+
 	if (opts == null) {
-		opts = {el: null};
+		opts = {tag: "", el: null};
 	}
 	if (opts.el == null)
 		opts.el = this.el.cntr;
 
-	if (opts.el.classList.contains(this.show_class))
-		return;
-
-	if (emsg != null)
-		opts.el.innerHTML = emsg;
+	if (emsg != null) {
+		el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
+		if (el_tag == null) {
+			el_tag = document.createElement("div");
+			el_tag.dataset.etag = opts.tag;
+			opts.el.append(el_tag);
+		}
+		el = document.createElement("div");
+		el.innerHTML = emsg;
+		el_tag.innerHTML = "";
+		el_tag.append(el);
+	}
 	opts.el.classList.add(this.show_class);
 
 	return this.cb.show(emsg, opts);
@@ -72,21 +82,29 @@ error_box.prototype.show = function (emsg, opts)
  * Hide error message.
  * prms:
  *  opts - an object with options:
+ *         tag  - a message tag ("" by default)
  *         el   - a container element with an error message
  *                if null, then use element specified at constructor call
  */
 error_box.prototype.hide = function (opts)
 {
+	var el_tag;
+
 	if (opts == null) {
-		opts = {el: null};
+		opts = {tag: null, el: null};
 	}
 	if (opts.el == null)
 		opts.el = this.el.cntr;
 
-	if (!opts.el.classList.contains(this.show_class))
-		return;
-
-	opts.el.classList.remove(this.show_class);
+	if (opts.tag != null) {
+		el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
+		if (el_tag)
+			el_tag.remove();
+	} else {
+		opts.el.innerHTML = "";
+	}
+	if (opts.el.children.length == 0)
+		opts.el.classList.remove(this.show_class);
 
 	return this.cb.hide(opts);
 }
