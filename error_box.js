@@ -35,7 +35,7 @@ function error_box(cntr_el, show_cb, hide_cb)
 	if (show_cb != null)
 		this.cb.show = show_cb.bind(this);
 	else
-		this.cb.show = function () { return true; };
+		this.cb.show = function (emsg, opts) { return emsg; };
 	if (hide_cb != null)
 		this.cb.hide = hide_cb.bind(this);
 	else
@@ -69,13 +69,13 @@ error_box.prototype.show = function (emsg, opts)
 			opts.el.append(el_tag);
 		}
 		el = document.createElement("div");
-		el.innerHTML = emsg;
+		el.innerHTML = this.cb.show(emsg, opts);
 		el_tag.innerHTML = "";
 		el_tag.append(el);
 	}
 	opts.el.classList.add(this.show_class);
 
-	return this.cb.show(emsg, opts);
+	return true;
 }
 
 /*
