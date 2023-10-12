@@ -61,6 +61,11 @@ error_box.prototype.show = function (emsg, opts)
 	if (opts.el == null)
 		opts.el = this.el.cntr;
 
+	if (opts.tag.match(/'/)) {
+		console.error(`tag shouldn't contain quote: ${opts.tag}!`);
+		return;
+	}
+
 	if (emsg != null) {
 		el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
 		if (el_tag == null) {
