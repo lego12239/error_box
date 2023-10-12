@@ -29,6 +29,7 @@ function error_box(cntr_el, show_cb, hide_cb)
 {
 	this.el = {};
 	this.cb = {show: null, hide: null};
+	this.t2ebox = {};
 	this.show_class = "show";
 
 	this.el.cntr = cntr_el;
@@ -60,6 +61,9 @@ error_box.prototype.show = function (emsg, opts)
 	}
 	if (opts.el == null)
 		opts.el = this.el.cntr;
+
+	if (this.t2ebox[opts.tag])
+		return this.t2ebox[opts.tag].show(emsg, opts);
 
 	if (opts.tag.match(/'/)) {
 		console.error(`tag shouldn't contain quote: ${opts.tag}!`);
@@ -101,6 +105,9 @@ error_box.prototype.hide = function (opts)
 	}
 	if (opts.el == null)
 		opts.el = this.el.cntr;
+
+	if (this.t2ebox[opts.tag])
+		return this.t2ebox[opts.tag].hide(opts);
 
 	if (opts.tag != null) {
 		el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
