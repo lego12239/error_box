@@ -51,6 +51,8 @@ function error_box(cntr_el, show_cb, hide_cb)
  *         tag  - a message tag ("" by default)
  *         el   - a container element for an error message
  *                if null, then use element specified at constructor call
+ *         is_append - if true, then append new emsg to existing one, instead
+ *                     of replace it. (false by default)
  */
 error_box.prototype.show = function (emsg, opts)
 {
