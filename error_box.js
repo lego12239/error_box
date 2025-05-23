@@ -100,19 +100,12 @@ error_box.prototype.hide = function (opts)
 {
 	var el_tag;
 
-	if (opts == null) {
-		opts = {tag: null, el: null};
-	}
-	if (opts.el == null)
-		opts.el = this.el.cntr;
+	opts = Object.assign({tag: "", el: this.el.cntr}, opts);
+	opts.tag = opts.tag.toString();
 
-	if (opts.tag != null) {
-		el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
-		if (el_tag)
-			el_tag.remove();
-	} else {
-		opts.el.innerHTML = "";
-	}
+	el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
+	if (el_tag)
+		el_tag.remove();
 	if (opts.el.children.length == 0)
 		opts.el.classList.remove(this.show_class);
 
