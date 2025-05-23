@@ -63,26 +63,26 @@ error_box.prototype.show = function (emsg, opts)
 	if (opts.el == null)
 		opts.el = this.el.cntr;
 
-	if (opts.tag.match(/'/)) {
+	if (opts.tag.match(/'/))
 		throw new Error(`tag shouldn't contain quote: ${opts.tag}!`);
-		return;
-	}
 
-	if (emsg != null) {
-		el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
-		if (el_tag == null) {
-			el_tag = document.createElement("div");
-			el_tag.dataset.etag = opts.tag;
-			opts.el.append(el_tag);
-		}
-		el = document.createElement("div");
-		el.innerHTML = emsg;
-		if (!opts.is_append)
-			el_tag.innerHTML = "";
-		el_tag.append(el);
+	if (emsg == null)
+		throw new Error("Error message is null");
 
-		this.cb.show(el, emsg, opts);
+	el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
+	if (el_tag == null) {
+		el_tag = document.createElement("div");
+		el_tag.dataset.etag = opts.tag;
+		opts.el.append(el_tag);
 	}
+	el = document.createElement("div");
+	el.innerHTML = emsg;
+	if (!opts.is_append)
+		el_tag.innerHTML = "";
+	el_tag.append(el);
+
+	this.cb.show(el, emsg, opts);
+
 	opts.el.classList.add(this.show_class);
 
 	return true;
