@@ -120,10 +120,7 @@ error_box.prototype.hide = function (opts)
  */
 error_box.prototype.hide_all = function (opts)
 {
-	if (opts == null)
-		opts = {el: null};
-	if (opts.el == null)
-		opts.el = this.el.cntr;
+	opts = Object.assign({el: this.el.cntr}, opts);
 	
 	opts.el.innerHTML = "";
 	opts.el.classList.remove(this.show_class);
