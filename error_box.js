@@ -63,7 +63,7 @@ error_box.prototype.show = function (emsg, opts)
 	if (opts.el == null)
 		opts.el = this.el.cntr;
 
-	if (opts.tag.match(/'/))
+	if (opts.tag.toString().match(/'/))
 		throw new Error(`tag shouldn't contain quote: ${opts.tag}!`);
 
 	if (emsg == null)
