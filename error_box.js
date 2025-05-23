@@ -58,7 +58,7 @@ error_box.prototype.show = function (emsg, opts)
 	var el_tag, el_msg;
 
 	if (opts == null) {
-		opts = {tag: "", el: null, is_append: 0};
+		opts = {tag: "", el: null, is_append: false};
 	}
 	if (opts.el == null)
 		opts.el = this.el.cntr;
