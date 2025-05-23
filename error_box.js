@@ -101,12 +101,14 @@ error_box.prototype.hide = function (opts)
 	opts.tag = opts.tag.toString();
 
 	el_tag = opts.el.querySelector("div[data-etag='" + opts.tag + "']");
-	if (el_tag)
+	if (el_tag) {
+		this.cb.hide(opts);
 		el_tag.remove();
+	}
 	if (opts.el.children.length == 0)
 		opts.el.classList.remove(this.show_class);
 
-	return this.cb.hide(opts);
+	return true;
 }
 
 /*
