@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>error box hide_all()</title>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="error_box.css" type="text/css"/>
+  <script src="error_box.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    var errbox;
+	var tag = 1;
+
+    function init()
+    {
+      errbox = new error_box(document.getElementById("errorbox"));
+    }
+	function show()
+	{
+		errbox.show("some err", {tag: tag});
+		tag++;
+	}
+	function hide()
+	{
+		errbox.hide_all();
+		tag = 1;
+	}
+
+  </script>
+</head>
+<body onload="init()">
+<!----------------------------------------------------------------------
+       Error box
+----------------------------------------------------------------------->
+<div id="errorbox">
+</div>
+
+<div style="margin-top: 20px">
+	<input type="button" onclick="hide()" value="hide all"/>
+	<input type="button" onclick="show()" value="show"/>
+</div>
+</body>
+</html>
