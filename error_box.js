@@ -80,10 +80,12 @@ error_box.prototype.show = function (emsg, opts)
 			opts.el.append(el_tag);
 		}
 		el = document.createElement("div");
-		el.innerHTML = this.cb.show(emsg, opts);
+		el.innerHTML = emsg;
 		if (!opts.is_append)
 			el_tag.innerHTML = "";
 		el_tag.append(el);
+
+		this.cb.show(el, emsg, opts);
 	}
 	opts.el.classList.add(this.show_class);
 
