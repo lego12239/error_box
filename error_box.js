@@ -122,9 +122,9 @@ error_box.prototype.hide_all = function (opts)
 {
 	opts = Object.assign({el: this.el.cntr}, opts);
 	
+	this.cb.hide(opts);
+
 	opts.el.innerHTML = "";
 	opts.el.classList.remove(this.show_class);
-
-	this.cb.hide(opts);
 }
 
