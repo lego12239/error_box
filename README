@@ -3,16 +3,102 @@ error_box
 
 A javascript library for displaying a box with an error message.
 
-Using
-=====
 
-Example:
+SYNOPSIS
+========
 
-var errbox = new error_box(document.getElementById("errorbox"));
-errbox.show();
-setTimeout(function () { errbox.hide();}, 10000);
+ebox = new error_box(document.getElementById("ebox_cntr"));
+ebox.show_class = "errshow";
+ebox.show("something happen");
+ebox.hide();
+ebox.hide_all();
 
-The constructor can also accepts a show callback and a hide callback, which
-are called on show() and hide() actions.
 
-Examples - ex*.html.
+DESCRIPTION
+===========
+
+At first, error_box instance should be created. The constructor accepts
+3 args:
+
+ebox = new error_box(cntr_el, show_cb, hide_cb)
+
+cntr_el - container for error messages
+show_cb - OPTIONAL. Show callback (see CALLBACKS)
+hide_cb - OPTIONAL. Hide callback (see CALLBACKS)
+
+Use show() to display some error message. This function just add a class
+specified in show_class property of the object to the container. By default,
+this is "show" class name. show() accepts 2 arguments:
+
+ebox.show(emsg, opts)
+
+emsg  - an error message to show
+opts  - OPTIONAL. An object with options:
+        tag  - a message tag ("" by default)
+        el   - a container element for an error message
+               if null, then use element specified at constructor call
+        is_append - if true, then append new emsg to existing one, instead
+                    of replace it. (false by default)
+
+See CALLBACKS about show callback.
+
+Use hide() to hide the error message. hide() accepts 1 argument:
+
+ebox.hide(opts)
+
+opts  - OPTIONAL. An object with options:
+        tag  - a message tag ("" by default)
+        el   - a container element with an error message
+               if null, then use element specified at constructor call
+
+See CALLBACKS about hide callback.
+
+Use hide_all() to hide all error messages (see TAGGED MESSAGES). hide_all()
+accepts 1 argument:
+
+ebox.hide_all(opts)
+
+opts  - OPTIONAL. An object with options:
+        el   - a container element with an error message
+               if null, then use element specified at constructor call
+
+
+TAGGED MESSAGES
+===============
+
+Each message can be tagged. A tag is specified via opts.tag for show() and
+hide(). When show() is called with a tag, then a specified message will be
+marked with this tag. Then, if hide() is called with the same tag, the message
+with that tag will be hidden, leaving the rest untouched.
+
+By default, tag is "".
+
+Use hide_all() to hide all messages.
+
+
+CALLBACKS
+=========
+
+show callback is called on show() after the new element with an error message
+is created and appended to the container (but before show_class is added to
+the container). It accepts the next arguments:
+
+el   - the created element with new error message
+emsg - the error message from show() call
+opts - opts object from show() call
+
+hide callback is called on hide() before the element with an error message is
+removed. If there is no error messages, then callback isn't called. It accepts
+the next arguments:
+
+opts - opts object from hide() call
+
+hide callback is also called on hide_all(). If it is called from hide(), then
+opts.tag is not null; if it is called from hide_all(), then opts.tag is always
+null.
+
+
+EXAMPLES
+========
+
+See ex*.html files.
