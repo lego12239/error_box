@@ -35,11 +35,11 @@ function error_box(cntr_el, show_cb, hide_cb)
 	if (show_cb != null)
 		this.cb.show = show_cb.bind(this);
 	else
-		this.cb.show = function (emsg, opts) { return emsg; };
+		this.cb.show = function (el, emsg, opts) { return true; };
 	if (hide_cb != null)
 		this.cb.hide = hide_cb.bind(this);
 	else
-		this.cb.hide = function () { return true; };
+		this.cb.hide = function (opts) { return true; };
 }
 
 /*
