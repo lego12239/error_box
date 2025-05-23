@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>error box t2ebox map</title>
+  <title>error box, many errboxes</title>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="error_box.css" type="text/css"/>
   <style type="text/css">
@@ -16,14 +16,13 @@
   <script src="error_box.js" type="text/javascript">
   </script>
   <script type="text/javascript">
-    var errbox;
+    var errbox = {};
 
     function init()
     {
-      errbox = new error_box();
-      errbox.t2ebox.sum1 = new error_box(document.querySelector("[name=sum1]").closest(".item").querySelector(".f_err_cntr"));
-      errbox.t2ebox.sum2 = new error_box(document.querySelector("[name=sum2]").closest(".item").querySelector(".f_err_cntr"));
-      errbox.t2ebox.sum3 = new error_box(document.querySelector("[name=sum3]").closest(".item").querySelector(".f_err_cntr"));
+      errbox.sum1 = new error_box(document.querySelector("[name=sum1]").closest(".item").querySelector(".f_err_cntr"));
+      errbox.sum2 = new error_box(document.querySelector("[name=sum2]").closest(".item").querySelector(".f_err_cntr"));
+      errbox.sum3 = new error_box(document.querySelector("[name=sum3]").closest(".item").querySelector(".f_err_cntr"));
     }
     function check(ev)
     {
@@ -31,10 +30,10 @@
 
       sum = ev.target.value;
       if ((sum != "") && (sum.match(/^[0-9]+(\.[0-9]+)?$/) == null)) {
-        errbox.show("Wrong sum: " + sum, {tag: ev.target.name});
+        errbox[ev.target.name].show("Wrong sum: " + sum);
         return;
       }
-      errbox.hide({tag: ev.target.name});
+      errbox[ev.target.name].hide();
     }
   </script>
 </head>
