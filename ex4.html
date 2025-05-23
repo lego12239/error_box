@@ -33,11 +33,12 @@
       }
       errbox.hide({tag: ev.target.name});
     }
-    function show_cb(emsg, opts)
+    function show_cb(el, emsg, opts)
     {
       var d = new Date();
 
-      return d.toLocaleDateString() + " " + d.toLocaleTimeString() + ": " + emsg;
+	  el.innerHTML = d.toLocaleDateString() + " " + d.toLocaleTimeString() + ": " +
+	    el.innerHTML;
     }
   </script>
 </head>
