@@ -118,3 +118,22 @@ error_box.prototype.hide = function (opts)
 
 	return this.cb.hide(opts);
 }
+
+/*
+ * Hide all error messages.
+ * prms:
+ *  opts - an object with options:
+ *         el - a container element with an error message
+ *              if null, then use element specified at constructor call
+ */
+error_box.prototype.hide_all = function (opts)
+{
+	if (opts == null)
+		opts = {el: null};
+	if (opts.el == null)
+		opts.el = this.el.cntr;
+	
+	opts.el.innerHTML = "";
+	opts.el.classList.remove(this.show_class);
+}
+
