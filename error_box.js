@@ -120,7 +120,7 @@ error_box.prototype.hide = function (opts)
  */
 error_box.prototype.hide_all = function (opts)
 {
-	if (opts.tag != null)
+	if ((opts != null) && (opts.tag != null))
 		console.error("hide_all() should be called without tag");
 
 	opts = Object.assign({el: this.el.cntr}, opts, {tag: null});
